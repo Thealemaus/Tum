@@ -1,0 +1,23 @@
+BLOG INFO
+
+blog_info(blog_name)
+avatar(blog_name)
+followers(blog_name)
+blog_likes(blog_name)
+posts(blog_name)
+queue(blog_name)
+draft(blog_name)
+submissions(blog_name)
+
+POST INFO
+
+edit
+reblog
+delete
+photo
+quote
+text
+link
+chat
+audio
+video
