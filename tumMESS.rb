@@ -1,19 +1,19 @@
 require 'tumblr_client'
 require 'oauth'
 Tumblr.configure do |config|
-   config.consumer_key = "1Juytw0l16Op1GODcv13lK9B0ySwVQom63lr9EsS246oIoYFM4"
-   config.consumer_secret = "plo1wb96DeIHtUXm7FE6ZnB5cgX5jDmKSDtYxntSsbzMVvOcz1"
-#   #config.oauth_token = "UNHfxvjiHbdPjIK548xhKCaDnC8Wlre4zWDqZKXyMrmtewygHf"
-#   #config.oauth_token_secret = "yCu1HWfnpUI80wnnwowB09SQcu2xAjG11chSiyXYe2bRQek085"
- end
+  config.consumer_key = "1Juytw0l16Op1GODcv13lK9B0ySwVQom63lr9EsS246oIoYFM4"
+  config.consumer_secret = "plo1wb96DeIHtUXm7FE6ZnB5cgX5jDmKSDtYxntSsbzMVvOcz1"
+  # config.oauth_token = "UNHfxvjiHbdPjIK548xhKCaDnC8Wlre4zWDqZKXyMrmtewygHf"
+  # config.oauth_token_secret = "yCu1HWfnpUI80wnnwowB09SQcu2xAjG11chSiyXYe2bRQek085"
+end
 
 class TumPrompt
   attr_accessor :User, :Input
   Client = Tumblr::Client.new(:client => :httpclient)
 
-   def session
+  def session
     @callback_url = "#{@@user}"
-    @consumer = OAuth::Consumer.new("key", "secret", :site => "http://tumblr.com")
+    @consumer = OAuth::Consumer.new("key", "secret", :site => "https://tumblr.com")
     @request_token = @consumer.get_request_token(:oauth_callback => @callback_url)
     session[:request_token] = @request_token
     redirect_to @request_token.authorize_url(:oauth_callback => @callback_url)
@@ -24,16 +24,16 @@ class TumPrompt
     print "Enter User: "
     @@user = gets.chomp.downcase
     session
-    while
-      @@user = gets.chomp.downcase
-      if @@user.include?(".tumblr.com") == false
-        puts "---------------------------------"
-        puts "Woah, Not A Valid URL. Try Again."
-        puts "example: something.tumblr.com"
-        print "Enter User:"
-      elsif @@user.include?(".tumblr.com") == true
-        break
-      end
+    # while
+    #   @@user = gets.chomp.downcase
+    #   if @@user.include?(".tumblr.com") == false
+    #     puts "---------------------------------"
+    #     puts "Woah, Not A Valid URL. Try Again."
+    #     puts "example: something.tumblr.com"
+    #     print "Enter User:"
+    #   elsif @@user.include?(".tumblr.com") == true
+    #     break
+    #   end
     end
     while @@input != "quit"
       puts "---------------------------------"
@@ -41,7 +41,7 @@ class TumPrompt
       print "Enter Command: "
       @@input = gets.chomp.downcase
       case @@input
-      when "info" then puts Client.dashboard{0}
+      when "info" then puts Client.info
       when "posts" then posts
       when "quit" then puts "Goodbye" 
       when "text post" then text_post
