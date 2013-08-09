@@ -17,23 +17,23 @@ class TumPrompt
     @request_token = @consumer.get_request_token(:oauth_callback => @callback_url)
     session[:request_token] = @request_token
     redirect_to @request_token.authorize_url(:oauth_callback => @callback_url)
+    @access_token = @request_token.get_access_token
   end
   def run
     puts "Welcome to TumPrompt, the command prompt for Tumblr geeks. This is a work in progress."
     @@input = ""
     print "Enter User: "
-    @@user = gets.chomp.downcase
-    session
-    # while
-    #   @@user = gets.chomp.downcase
-    #   if @@user.include?(".tumblr.com") == false
-    #     puts "---------------------------------"
-    #     puts "Woah, Not A Valid URL. Try Again."
-    #     puts "example: something.tumblr.com"
-    #     print "Enter User:"
-    #   elsif @@user.include?(".tumblr.com") == true
-    #     break
-    #   end
+    while
+      @@user = gets.chomp.downcase
+      if @@user.include?(".tumblr.com") == false
+        puts "---------------------------------"
+        puts "Woah, Not A Valid URL. Try Again."
+        puts "example: something.tumblr.com"
+        print "Enter User:"
+      elsif @@user.include?(".tumblr.com") == true
+        break
+      end
+      session
     end
     while @@input != "quit"
       puts "---------------------------------"

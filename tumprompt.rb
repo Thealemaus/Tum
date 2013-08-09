@@ -1,11 +1,11 @@
 require 'tumblr_client'
 require 'oauth'
-Tumblr.configure do |config|
-   config.consumer_key = "1Juytw0l16Op1GODcv13lK9B0ySwVQom63lr9EsS246oIoYFM4"
-   config.consumer_secret = "plo1wb96DeIHtUXm7FE6ZnB5cgX5jDmKSDtYxntSsbzMVvOcz1"
-#   #config.oauth_token = "UNHfxvjiHbdPjIK548xhKCaDnC8Wlre4zWDqZKXyMrmtewygHf"
-#   #config.oauth_token_secret = "yCu1HWfnpUI80wnnwowB09SQcu2xAjG11chSiyXYe2bRQek085"
- end
+# Tumblr.configure do |config|
+#    config.consumer_key = "1Juytw0l16Op1GODcv13lK9B0ySwVQom63lr9EsS246oIoYFM4"
+#    config.consumer_secret = "plo1wb96DeIHtUXm7FE6ZnB5cgX5jDmKSDtYxntSsbzMVvOcz1"
+# #   #config.oauth_token = "UNHfxvjiHbdPjIK548xhKCaDnC8Wlre4zWDqZKXyMrmtewygHf"
+# #   #config.oauth_token_secret = "yCu1HWfnpUI80wnnwowB09SQcu2xAjG11chSiyXYe2bRQek085"
+#  end
 
 class TumPrompt
   attr_accessor :User, :Input
@@ -17,13 +17,12 @@ class TumPrompt
     @request_token = @consumer.get_request_token(:oauth_callback => @callback_url)
     session[:request_token] = @request_token
     redirect_to @request_token.authorize_url(:oauth_callback => @callback_url)
+    @access_token = @request_token.get_access_token
   end
   def run
     puts "Welcome to TumPrompt, the command prompt for Tumblr geeks. This is a work in progress."
     @@input = ""
     print "Enter User: "
-    @@user = gets.chomp.downcase
-    session
     while
       @@user = gets.chomp.downcase
       if @@user.include?(".tumblr.com") == false
@@ -35,6 +34,7 @@ class TumPrompt
         break
       end
     end
+    session
     while @@input != "quit"
       puts "---------------------------------"
       puts "Commands Avaiable are: Text, Photo, Chat, Audio, Video, Link and Quote Post"
