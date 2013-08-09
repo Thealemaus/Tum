@@ -1,5 +1,9 @@
 require 'tumblr_client'
 require 'oauth'
+# TO GET PRPGRAM TO WORK UNCOMMENT THIS 
+
+
+
 # Tumblr.configure do |config|
 #    config.consumer_key = "1Juytw0l16Op1GODcv13lK9B0ySwVQom63lr9EsS246oIoYFM4"
 #    config.consumer_secret = "plo1wb96DeIHtUXm7FE6ZnB5cgX5jDmKSDtYxntSsbzMVvOcz1"
@@ -10,7 +14,7 @@ require 'oauth'
 class TumPrompt
   attr_accessor :User, :Input
   Client = Tumblr::Client.new(:client => :httpclient)
-
+    # FOR THE PROGRAM TO WORK COMMENT OUT THE SESSION METHOD HERE
    def session
     @callback_url = "#{@@user}"
     @consumer = OAuth::Consumer.new("key", "secret", :site => "http://tumblr.com")
@@ -34,6 +38,7 @@ class TumPrompt
         break
       end
     end
+    # IN ORDER TO WORK COMMENT THIS METHOD CALL
     session
     while @@input != "quit"
       puts "---------------------------------"
