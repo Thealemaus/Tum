@@ -36,7 +36,7 @@ class TumPrompt
         break
       end
     end
-    # IN ORDER TO WORK COMMENT THIS METHOD CALLx  
+    # IN ORDER TO WORK COMMENT THIS METHOD CALL 
     # session
     while @@input != "quit"
       puts "---------------------------------"
@@ -44,7 +44,7 @@ class TumPrompt
       print "Enter Command: "
       @@input = gets.chomp.downcase
       case @@input
-      when "info" then puts Client.dashboard{0}
+      when "info" then puts Client.blog_info
       when "posts" then posts
       when "quit" then puts "Goodbye" 
       when "text post" then text_post
@@ -113,7 +113,6 @@ class TumPrompt
   end
   
   def chat_post
-    puts "Under Construction"
     print "Creating a Chat Post. Do You Want To Title This Chat? "
     answer = gets.chomp.downcase
     if answer == "yes"
@@ -125,6 +124,7 @@ class TumPrompt
       chat_conversationA = gets.chomp
       print "What Did Person B Say? "
       chat_conversationB = gets.chomp
+      puts "Publishing This Post..."
       Client.chat("#{@@user}", {:title => "#{chat_title}", :conversation => "#{chat_conversationA} \n #{chat_conversationB}" })
     elsif answer == "no"
       print "What is the conversation? "
@@ -133,13 +133,14 @@ class TumPrompt
       chat_conversationA = gets.chomp
       print "What Did Person B Say? "
       chat_conversationB = gets.chomp
+      puts "Publishing This Post..."
       Client.chat("#{@@user}", {:conversation => "#{chat_conversationA} \n #{chat_conversationB}"})
     end
 
   end
 
   def audio_post
-    puts "Under Construction"
+    puts "Gem Fails to Post"
     print "Please Choose File Type (File/Url) "
     answer = gets.chomp.downcase
     if answer == "file"
@@ -174,6 +175,7 @@ class TumPrompt
   end
 
   def video_post
+    puts "Gem Fails to Post"
     print "Please Choose File Type (File/Url) "
     answer = gets.chomp.downcase
     if answer == "file"
@@ -248,7 +250,7 @@ class TumPrompt
     print "Enter URL: "
     blog_find_by_url = gets.chomp.downcase
     puts "Processing"
-    Client.posts("#{blog_find_by_url}")
+    Client.posts 'the-amen-fashion.tumblr.com', :type => 'photo'
   end
 
   def error_message
@@ -274,8 +276,6 @@ class TumPrompt
 end
 tumblrprompt = TumPrompt.new
 tumblrprompt.run
-
-# DEMO PHOTO URL
 
 # Grabbing a specific blogs posts
 #  client.posts("codingjester.tumblr.com")
