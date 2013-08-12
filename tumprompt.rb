@@ -44,7 +44,7 @@ class TumPrompt
       print "Enter Command: "
       @@input = gets.chomp.downcase
       case @@input
-      when "info" then puts Client.blog_info
+      when "info" then puts Client.dashboard
       when "posts" then posts
       when "quit" then puts "Goodbye" 
       when "text post" then text_post
