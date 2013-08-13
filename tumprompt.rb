@@ -40,20 +40,20 @@ class TumPrompt
     # session
     while @@input != "quit"
       puts "---------------------------------"
-      puts "Commands Avaiable are: Text, Photo, Chat, Audio, Video, Link and Quote Post"
+      puts "Commands Avaiable are: Text, Photo, Chat, Audio, Video, Link and Quote. To exit type 'quit'"
       print "Enter Command: "
       @@input = gets.chomp.downcase
       case @@input
       when "info" then puts Client.dashboard
       when "posts" then posts
-      when "quit" then puts "Goodbye" 
-      when "text post" then text_post
-      when "photo post" then photo_post
-      when "chat post" then chat_post
-      when "audio post" then audio_post
-      when "video post" then video_post
-      when "link post" then link_post
-      when "quote post" then quote_post
+      when "quit" then puts "Goodbye, Thanks For Using TumPrompt" 
+      when "text" then text_post
+      when "photo" then photo_post
+      when "chat" then chat_post
+      when "audio" then audio_post
+      when "video" then video_post
+      when "link" then link_post
+      when "quote" then quote_post
       else 
         error_message
       end
@@ -140,7 +140,7 @@ class TumPrompt
   end
 
   def audio_post
-    puts "Gem Fails to Post"
+   # puts "Gem Fails to Post"
     print "Please Choose File Type (File/Url) "
     answer = gets.chomp.downcase
     if answer == "file"
@@ -175,7 +175,7 @@ class TumPrompt
   end
 
   def video_post
-    puts "Gem Fails to Post"
+   # puts "Gem Fails to Post"
     print "Please Choose File Type (File/Url) "
     answer = gets.chomp.downcase
     if answer == "file"
